@@ -3,8 +3,6 @@
 ## Project setup
 
 ```
-# Intsall chart.js
-npm install vue-chartjs chart.js --save
 npm install
 ```
 

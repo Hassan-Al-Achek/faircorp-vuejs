@@ -55,10 +55,8 @@ export default {
     },
     async deleteWindow(){
       await axios.delete(`${API_HOST}/api/windows/${this.window.id}`);
+      this.$forceUpdate();
     },
-    async addWindow(){
-      await axios.post(`${API_HOST}/api/windows`);
-    }
   }
 }
 </script>

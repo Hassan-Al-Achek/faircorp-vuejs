@@ -10,7 +10,7 @@
         <li
           v-for="tab in tabs"
           v-bind:key="tab"
-          href="#"
+          v-bind:href="['#', {tab}]"
           v-bind:class="['nav-link', { active: currentTab === tab }]"
           data-toggle="pill"
           v-on:click="currentTab = tab"

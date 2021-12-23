@@ -4,21 +4,23 @@
             <div class="create-window fw-bold pe-3">Create window</div>
         </div>
         <hr/>
-        <form>
-        <input type="text" class="form-control form-control mb-2" v-model="windowName">
-
         <template>
-            <div v-for="room in rooms" v-bind:room="room" v-bind:key="room.id"  class="form-check">
-                <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="roomOption" v-bind:value="room.id" v-model="roomNumber">{{room.name}}
-                </label>
-            </div>
-        </template>
+            <form>
+            <input type="text" class="form-control form-control mb-2" v-model="windowName">
 
-        <div class="details d-flex">
-            <button type="button" class="addWindow btn p-2 btn-primary me-2" v-on:click="createWindow">Create window</button>
-        </div>
-        </form>
+            
+                <div v-for="room in rooms" v-bind:room="room" v-bind:key="room.id"  class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="roomOption" v-bind:value="room.id" v-model="roomNumber">{{room.name}}
+                    </label>
+                </div>
+            
+
+            <div class="details d-flex">
+                <button type="button" class="addWindow btn p-2 btn-primary me-2" v-on:click="createWindow" v-bind:disabled="!windowName || !roomNumber">Create window</button>
+            </div>
+            </form>
+        </template>
     </div>
 </template>
 
@@ -32,8 +34,8 @@ export default {
     data(){
         return {
             rooms: [],
-            roomNumber:0,
-            windowName:"",
+            roomNumber: null,
+            windowName: null,
         }
     },
     
@@ -44,9 +46,6 @@ export default {
     },
 
     methods:{
-        methodThatForcesUpdate() {
-            this.$forceUpdate();
-        },
         async createWindow(){
             let postData = {
                 "name": this.windowName, 
@@ -54,6 +53,7 @@ export default {
                 "windowStatus": "CLOSED"
             };
             await axios.post(`${API_HOST}/api/windows`, postData);
+            this.$forceUpdate();
         },
     }
 
