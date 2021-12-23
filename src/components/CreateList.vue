@@ -53,7 +53,7 @@ export default {
                 "windowStatus": "CLOSED"
             };
             await axios.post(`${API_HOST}/api/windows`, postData);
-            this.$forceUpdate();
+            location.reload()
         },
     }
 
